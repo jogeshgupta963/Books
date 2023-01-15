@@ -1,0 +1,221 @@
+{
+    "swagger":"2.0",
+    "info":{
+        "version": "1.0.0",
+        "title":"Books api",
+        "description":"api"
+    },
+    "host": "localhost:3001",
+    "basePath": "/api",
+    "tags": [{
+        "name":"Book",
+        "description": "A system for resolving data of published books"
+    }],
+    "schemes": ["http"],
+    "paths": {
+        "/api/user/signup":{
+            "post": {
+                "tags": [
+                    "Signup"
+                ],
+                "parameters": [{
+                   "in": "body",
+                   "name": "body",
+                   "description": "signup a user"
+                   ,"schema": {
+                        "$ref": "#/definitions/User/properties/email"
+                   }
+                }],
+                "summary": "Signup a user",
+                "responses": {
+                    "201":{
+                        "description": "ok",
+                        "schema":{
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/login":{
+            "post": {
+                "tags": [
+                    "Login"
+                ],
+                "parameters": [{
+                   "in": "body",
+                   "name": "body",
+                   "description": "login a user"
+                   ,"schema": {
+                        "$ref": "#/definitions/User"
+                   }
+                }],
+                "summary": "Login a user",
+                "responses": {
+                    "200":{
+                        "description": "ok",
+                        "schema":{
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/signout":{
+            "post": {
+                "tags": [
+                    "Signout"
+                ],
+                "summary": "Signout a user",
+                "responses": {
+                    "200":{
+                        "description": "ok",
+                        "schema":{
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/":{
+            "get": {
+                "tags": [
+                    "Current User"
+                ],
+                "summary": "get current user ",
+                
+                "responses": {
+                    "200":{
+                        "description": "ok",
+                        "schema":{
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/book/":{
+            "post": {
+                "tags": [
+                    "Create Book"
+                ],
+                "summary": "create new book ",
+                "parameters": [{
+                    "in": "body",
+                    "name": "body",
+                    "description": "create a book"
+                    ,"schema": {
+                         "$ref": "#/definitions/Book"
+                    }
+                 }],
+                "responses": {
+                    "201":{
+                        "description": "ok",
+                        "schema":{
+                            "$ref": "#/definitions/Book"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Get all Books"
+                ],
+                "summary": "get all books",
+                "responses": {
+                    "201":{
+                        "description": "ok",
+                        "schema":{
+                            "$ref": "#/definitions/Book"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/book/:bookId":{
+            "put": {
+                "tags": [
+                    "update Book"
+                ],
+                "summary": " update  book ",
+                "parameters": [{
+                    "in": "body",
+                    "name": "body",
+                    "description": "create a book"
+                    ,"schema": {
+                         "$ref": "#/definitions/Book"
+                    }
+                 }],
+                "responses": {
+                    "200":{
+                        "description": "ok",
+                        "schema":{
+                            "$ref": "#/definitions/Book"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Get  Book"
+                ],
+                "summary": "get  book",
+                "responses": {
+                    "200":{
+                        "description": "ok",
+                        "schema":{
+                            "$ref": "#/definitions/Book"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "delete  Book"
+                ],
+                "summary": "delete  book",
+                "responses": {
+                    "200":{
+                        "description": "ok",
+                        "schema":{
+                            "$ref": "#/definitions/Book"
+                        }
+                    }
+                }
+            }
+        }
+    },
+
+    "definitions": {
+        "User":{
+            "properties":{
+                "id":{
+                    "type":"string"
+                },
+                "name":{"type":"string"},
+                "email":{"type":"string"},
+                "password":{"type":"string"},
+                "profession":{"type":"string"}
+                
+            }
+        },
+        "Book":{
+            "properties":{
+                "id":{
+                    "type":"string"
+                },
+                "name":{"type":"string"},
+                "released":{"type":"string"},
+                "genre":{"type":"string"},
+                "author":{
+                    "type":"object","additionalProperties": {
+                        "$ref":"#/definitions/User"
+                    }
+                },
+                "sold":{"type":"integer"},
+                "pages":{"type":"integer"}
+            }
+        }
+    }
+   
+}
